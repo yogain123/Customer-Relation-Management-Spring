@@ -1,0 +1,22 @@
+<h2 class="bg bg-primary" style="margin-bottom:50px; height:50px; align:centre">Customer Relationship Manager</h2>
+<a href="#!addCustomer" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span> Add Customer </a>
+<table style="margin-top:40px;" class="table">
+  <thead>
+    <tr>
+      <th>Customer ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="active" ng-repeat="item in fakeData">
+      <td>{{item.id}}</td>
+      <td>{{item.firstName}}</td>
+      <td>{{item.lastName}}</td>
+      <td>{{item.email}}</td>
+      <td><button type="button" class="btn btn-warning" ng-click="update(item)">Update</button> | <button type=""="button" class="btn btn-danger" ng-click="delete(item)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
