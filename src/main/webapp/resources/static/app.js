@@ -63,7 +63,7 @@ app.controller("homeCtrl", function($scope, $http, $state, $rootScope, $timeout)
       });
 
 
-    }, 100);
+    }, 40);
 
 
 
