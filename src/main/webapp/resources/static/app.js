@@ -49,7 +49,6 @@ app.controller("homeCtrl", function($scope, $http, $state, $rootScope, $timeout)
 
   };
 
-
   $scope.init = () => {
 
     $timeout(() => {
@@ -62,10 +61,7 @@ app.controller("homeCtrl", function($scope, $http, $state, $rootScope, $timeout)
         console.log("Error");
       });
 
-
-    }, 40);
-
-
+    }, 1000);
 
   };
 
@@ -97,11 +93,11 @@ app.controller("updateCustomerCtrl", function($scope, $state, $http) {
   $scope.name = "Yogendra";
   $scope.updateDone = (item) => {
 
-    var url = "/CRM/updatingCustomer/"+item.id;
+    var url = "/CRM/updatingCustomer/" + item.id;
 
-    $http.put(url,$scope.personDetails).then(() => {
-        console.log("Success");
-    },() => {
+    $http.put(url, $scope.personDetails).then(() => {
+      console.log("Success");
+    }, () => {
       console.log("Error");
     });
 

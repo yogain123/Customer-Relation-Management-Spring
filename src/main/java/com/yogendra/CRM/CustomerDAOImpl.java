@@ -72,9 +72,19 @@ public class CustomerDAOImpl implements CustomerDAO{
 		Session session = factory.getCurrentSession();
 		Customer c = gson.fromJson(data, Customer.class);
 		Customer databaseValue = (Customer) session.get(Customer.class, id);
+		
+		
+		
+		System.out.println("datavase value ******"+databaseValue);
+
+		
 		databaseValue.setFirstName(c.getFirstName());
 		databaseValue.setLastName(c.getLastName());
 		databaseValue.setEmail(c.getEmail());
+		Address a = new Address();
+		a.setCity(c.getAddress().getCity());
+		a.setCountry(c.getAddress().getCountry());
+		databaseValue.setAddress(a);
 		session.save(databaseValue);
 		
 	
