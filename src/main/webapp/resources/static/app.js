@@ -6,6 +6,7 @@ app.config(function($urlRouterProvider, $stateProvider) {
   $stateProvider
     .state('/addCustomer', {
       url: "/addCustomer",
+      params: {},
       templateUrl: "resources/static/addCustomer.html",
       controller: "addCustomerCtrl"
     })
@@ -23,9 +24,9 @@ app.config(function($urlRouterProvider, $stateProvider) {
     });
 });
 
-app.controller("homeCtrl", function($scope, $http, $state, $rootScope, $timeout) {
+app.controller("homeCtrl", function($scope, $http, $state, $timeout) {
 
-  console.log("inside controller");
+  console.log("inside Home Controller controller");
 
   $scope.update = function(item) {
     $scope.fakeData = [];
@@ -41,48 +42,47 @@ app.controller("homeCtrl", function($scope, $http, $state, $rootScope, $timeout)
     var url = "/CRM/deletingCustomer/" + item.id;
     $http.delete(url).then(() => {
       console.log("SuccessDelete");
+      $scope.init();
+
     }, () => {
       console.log("ErrorDelete");
     });
 
-    $scope.init();
 
   };
 
   $scope.init = () => {
+    console.log("inside init");
+    $http.get("/CRM/gettingAllCustomer").then((data) => {
+      $scope.fakeData = data.data;
+      console.log($scope.fakeData);
+      console.log("Success");
 
-    $timeout(() => {
-      $http.get("/CRM/gettingAllCustomer").then((data) => {
-        $scope.fakeData = data.data;
-        console.log($scope.fakeData);
-        console.log("Success");
-
-      }, () => {
-        console.log("Error");
-      });
-
-    }, 1000);
-
+    }, () => {
+      console.log("Error");
+    });
   };
 
   $scope.init();
+
 });
 
 
 app.controller("addCustomerCtrl", function($scope, $http, $state) {
   $scope.name = "Yogendra";
   $scope.addDone = () => {
-    console.log("Inside addDone " + JSON.stringify($scope.personDetails));
+    //console.log("Inside addDone " + JSON.stringify($scope.personDetails));
 
-    $http.post("/CRM/addingCustomer", $scope.personDetails).then(() => {
-      console.log("Success");
+    $http.post("/CRM/addingCustomer", $scope.personDetails).then((data) => {
+      console.log("** " + data.data);
+      $state.current.params = data.data; // Called via REStTemplate
+      console.log("Ssssuccess");
+      $state.go('/', {
+        reload: false
+      });
 
     }, () => {
       console.log("Error");
-    });
-
-    $state.go('/', {
-      reload: true
     });
 
   };
@@ -97,13 +97,14 @@ app.controller("updateCustomerCtrl", function($scope, $state, $http) {
 
     $http.put(url, $scope.personDetails).then(() => {
       console.log("Success");
+      $state.go('/', {
+        reload: false
+      });
+
     }, () => {
       console.log("Error");
     });
 
-    $state.go('/', {
-      reload: false
-    });
 
   };
   $scope.$watch("personDetails.firstName", function(newValue, oldValue) {

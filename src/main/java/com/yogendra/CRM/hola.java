@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class hola
@@ -20,7 +20,9 @@ public class hola
 	{
 		System.out.println("Inside AddingCustomer "+data);
 		String res=customerService.addCustomer(data);
-		return res;
+		String result = gettingAllCustomerREST();
+		System.out.println("something");
+		return result;
 	}
 	
 	
@@ -45,6 +47,15 @@ public class hola
 		
 		System.out.println(" inside update "+id);
 		customerService.updatingCustomer(id, data);
+	}
+	
+	private static String gettingAllCustomerREST()
+	{
+	    final String uri = "http://localhost:8086/CRM/gettingAllCustomer";
+	     
+	    RestTemplate restTemplate = new RestTemplate();
+	    String result = restTemplate.getForObject(uri, String.class);
+	    return result;
 	}
 	
 }
