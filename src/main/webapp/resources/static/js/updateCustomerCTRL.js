@@ -2,6 +2,7 @@ app.controller("updateCustomerCtrl", function($scope, $state, $http) {
   $scope.personDetails = $state.get("/").params;
   $scope.name = "Yogendra";
   $scope.updateDone = (item) => {
+    console.log("item "+item);
 
     var url = "/CRM/updatingCustomer/" + item.id;
 

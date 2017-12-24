@@ -6,7 +6,7 @@ app.controller("homeCtrl", function($scope, $http, $state, $timeout) {
     $scope.fakeData = [];
     $state.current.params = item;
     $state.go('/updateCustomer', {
-      reload: true
+      reload: false
     });
   };
 
@@ -26,6 +26,8 @@ app.controller("homeCtrl", function($scope, $http, $state, $timeout) {
   };
 
   $scope.init = () => {
+
+    console.log("LOL "+JSON.stringify($state.get("/addCustomer").params));
     console.log("inside init");
     $http.get("/CRM/gettingAllCustomer").then((data) => {
       $scope.fakeData = data.data;

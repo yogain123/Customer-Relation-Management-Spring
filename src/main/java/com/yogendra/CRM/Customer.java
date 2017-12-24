@@ -1,20 +1,17 @@
 package com.yogendra.CRM;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 
 @Entity
@@ -36,15 +33,29 @@ public class Customer {
 	private String email;
 	
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="Address_ID")
-	private Address address;
+	private List<Address> address;
 	
-	public Address getAddress() {
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="Phone_ID")
+	private Phone phno;
+	
+	
+
+	public Phone getPhno() {
+		return phno;
+	}
+
+	public void setPhno(Phone phno) {
+		this.phno = phno;
+	}
+
+	public List<Address> getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(List<Address> address) {
 		this.address = address;
 	}
 

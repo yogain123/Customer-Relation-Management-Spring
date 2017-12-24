@@ -1,10 +1,15 @@
 app.controller("addCustomerCtrl", function($scope, $http, $state) {
   $scope.name = "Yogendra";
-  $scope.addDone = () => {
-    //console.log("Inside addDone " + JSON.stringify($scope.personDetails));
+  let arr = [];
+    $scope.addDone = () => {
+      arr.push($scope.address1);
+      arr.push($scope.address2);
+      $scope.personDetails.address = arr;
+      console.log("personDetails "+$scope.personDetails);
+      console.log("Inside addDone " + JSON.stringify($scope.personDetails));
 
     $http.post("/CRM/addingCustomer", $scope.personDetails).then((data) => {
-      console.log("** " + data.data);
+      console.log("** " + JSON.stringify(data.data));
       $state.current.params = data.data; // Called via REStTemplate
       console.log("Ssssuccess");
       $state.go('/', {

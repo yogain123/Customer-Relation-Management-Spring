@@ -80,12 +80,33 @@ public class CustomerDAOImpl implements CustomerDAO{
 		databaseValue.setFirstName(c.getFirstName());
 		databaseValue.setLastName(c.getLastName());
 		databaseValue.setEmail(c.getEmail());
-		
-		Address a = (Address) session.get(Address.class, id);
+	    List<Address> addresses = new ArrayList<Address>();
+	    
+	    Phone phone = databaseValue.getPhno();
+	    
+	    phone.setExtensionNumber(c.getPhno().getExtensionNumber());
+	    phone.setMainNumber(c.getPhno().getMainNumber());
+	    
+	    databaseValue.setPhno(phone);
+	    
+	    addresses = databaseValue.getAddress();
+	    List<Address> newAddressList = new ArrayList<Address>();
+	    int count = 0 ;
+	    for(Address a : addresses)
+	    {
+	    	System.out.println(a);
+	    	a.setCity(c.getAddress().get(count).getCity());
+	    	a.setCountry(c.getAddress().get(count).getCountry());
+	    	
+	    	newAddressList.add(a);
+	    	
+
+	    }
 				
-		a.setCity(c.getAddress().getCity());
-		a.setCountry(c.getAddress().getCountry());
-		databaseValue.setAddress(a);
+		//a.setCity(c.getAddress().getCity());
+		//a.setCountry(c.getAddress().getCountry());
+	    databaseValue.setAddress(newAddressList);
+		
 		session.update(databaseValue);
 	
 	}
