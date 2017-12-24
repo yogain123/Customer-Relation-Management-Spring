@@ -1,4 +1,4 @@
-package com.yogendra.CRM;
+package com.yogendra.CRM.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

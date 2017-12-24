@@ -1,4 +1,4 @@
-package com.yogendra.CRM;
+package com.yogendra.CRM.POJO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

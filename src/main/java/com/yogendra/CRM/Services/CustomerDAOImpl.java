@@ -1,4 +1,4 @@
-package com.yogendra.CRM;
+package com.yogendra.CRM.Services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.google.gson.Gson;
+import com.yogendra.CRM.POJO.Address;
+import com.yogendra.CRM.POJO.Customer;
+import com.yogendra.CRM.POJO.Phone;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO{

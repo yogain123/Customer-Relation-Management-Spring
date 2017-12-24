@@ -1,4 +1,4 @@
-package com.yogendra.CRM;
+package com.yogendra.CRM.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
