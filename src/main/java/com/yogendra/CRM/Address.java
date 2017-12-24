@@ -1,11 +1,14 @@
 package com.yogendra.CRM;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.stereotype.Service;
 
 @Entity
 @Table(name="Address")
@@ -13,6 +16,7 @@ public class Address {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private int id;
 	
 	@Column(name="country")

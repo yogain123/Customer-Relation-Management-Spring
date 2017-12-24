@@ -2,6 +2,8 @@ package com.yogendra.CRM;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 
 @Entity
 @Table(name="Customer_Relation_Management")
@@ -31,6 +35,7 @@ public class Customer {
 	@Column(name="email")
 	private String email;
 	
+
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="Address_ID")
 	private Address address;

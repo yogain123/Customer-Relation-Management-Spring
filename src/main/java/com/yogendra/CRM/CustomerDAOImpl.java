@@ -3,10 +3,8 @@ package com.yogendra.CRM;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +15,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 	
 	@Autowired
 	private SessionFactory factory;
+
 	
 	@org.springframework.transaction.annotation.Transactional
 	public String addCustomer(String data) 
@@ -81,12 +80,13 @@ public class CustomerDAOImpl implements CustomerDAO{
 		databaseValue.setFirstName(c.getFirstName());
 		databaseValue.setLastName(c.getLastName());
 		databaseValue.setEmail(c.getEmail());
-		Address a = new Address();
+		
+		Address a = (Address) session.get(Address.class, id);
+				
 		a.setCity(c.getAddress().getCity());
 		a.setCountry(c.getAddress().getCountry());
 		databaseValue.setAddress(a);
-		session.save(databaseValue);
-		
+		session.update(databaseValue);
 	
 	}
 	
