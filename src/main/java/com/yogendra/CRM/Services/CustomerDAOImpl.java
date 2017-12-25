@@ -20,6 +20,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 	
 	@Autowired
 	private SessionFactory factory;
+	
+	@Autowired ServiceProvider service;
 
 	
 	@org.springframework.transaction.annotation.Transactional
@@ -35,7 +37,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 			session.save(c);
 
 			//Just for Checking External API call from JAVA---------------
-			String LocationJson = CustomerDAOImpl.getLocation(); 
+			String uri = "http://ip-api.com/json/208.80.152.201";
+			String LocationJson = service.restCall(uri);  // Gettong All API Details
 			LocationFinder location = gson.fromJson(LocationJson, LocationFinder.class);
 			session.save(location);
 			//------------------------------------------------------------
@@ -123,16 +126,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		session.update(databaseValue);
 	
 	}
-	
-	private static String getLocation()
-	{
-	    final String uri = "http://ip-api.com/json/208.80.152.201";
-	     
-	    RestTemplate restTemplate = new RestTemplate();
-	    String result = restTemplate.getForObject(uri, String.class);
-	     
-	    return result;
-	}
+
 	
 }
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.yogendra.CRM.Services.CustomerService;
+import com.yogendra.CRM.Services.ServiceProvider;
 
 @RestController
 public class hola
@@ -16,13 +17,18 @@ public class hola
 	@Autowired
 	CustomerService customerService;
 	
+	@Autowired
+	ServiceProvider service;
+	
 	
 	@RequestMapping(value="/addingCustomer", method=RequestMethod.POST)
 	public String addingCustomer(@RequestBody String data)
 	{
 		System.out.println("Inside AddingCustomer "+data);
 		String res=customerService.addCustomer(data);
-		String result = gettingAllCustomerREST();
+		
+		String uri = "http://localhost:8086/CRM/gettingAllCustomer";
+		String result = service.restCall(uri); // GEtting All Customer
 		System.out.println("something");
 		return result;
 	}
@@ -51,13 +57,6 @@ public class hola
 		customerService.updatingCustomer(id, data);
 	}
 	
-	private static String gettingAllCustomerREST()
-	{
-	    final String uri = "http://localhost:8086/CRM/gettingAllCustomer";
-	     
-	    RestTemplate restTemplate = new RestTemplate();
-	    String result = restTemplate.getForObject(uri, String.class);
-	    return result;
-	}
+
 	
 }
