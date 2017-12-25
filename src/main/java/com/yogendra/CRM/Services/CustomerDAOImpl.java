@@ -1,7 +1,9 @@
 package com.yogendra.CRM.Services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -152,12 +154,27 @@ public class CustomerDAOImpl implements CustomerDAO{
 		Customer customer = (Customer) session.get(Customer.class, id);
 		result = gson.toJson(customer);
 		System.out.println(customer);
+		
+		
+		//Map with Different type of Values--------------------------------------------
+		Map<Integer,Object> hm = new HashMap<Integer, Object>();
+		String uri = "http://ip-api.com/json/208.80.152.201";
+		String LocationJson = service.restCall(uri);  // Gettong All API Details
+		LocationFinder location = gson.fromJson(LocationJson, LocationFinder.class);
+        hm.put(123, customer);
+        hm.put(456, location);
+        System.out.println("HASHMAP  of Different Types"+gson.toJson(hm).toString());
+        //----------------------------------------------------------------------------
+
 		return result;
 	}
 	
 	
 	@org.springframework.transaction.annotation.Transactional
 	public String gettingSearchedCustomerWithName(String firstName) {
+		
+		
+		
 		
 		System.out.println("Inside gettingSearchedCustomerWithName");
 		Session session = factory.getCurrentSession();
@@ -170,6 +187,32 @@ public class CustomerDAOImpl implements CustomerDAO{
 		
 		String result = gson.toJson(customersList);
 		System.out.println(result);
+		
+		Map<Integer,List<Customer>> hm = new HashMap<Integer, List<Customer>>();
+		
+        hm.put(111, customersList);
+        hm.put(222, customersList);
+        System.out.println("HASHMAP "+gson.toJson(hm).toString());
+        
+        //converting back to JAVA Object // Use Either Map.class ORR hm.getClass() , Both will work
+        System.out.println(gson.fromJson(gson.toJson(hm), Map.class));
+        
+        
+        //Iterating
+        for(Map.Entry<Integer, List<Customer>> hhmm : hm.entrySet())
+        	System.out.println("GEtting Key Value "+hhmm.getKey()+"  "+hhmm.getValue());
+        
+        //-----------------------------------------------------------
+		Map<Integer,Object> checkhm = new HashMap<Integer, Object>();
+		checkhm.put(1, "hola");
+		checkhm.put(2, 233);
+		
+		List<Object> checklist = new ArrayList<Object>();
+		checklist.add("hola");
+		checklist.add(233);
+		//-----------------------------------------------------------
+
+		
 		return result;
 	}
 
