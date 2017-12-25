@@ -7,9 +7,9 @@
 #
 # These files are text and should be normalized (Convert crlf => lf)
 
-*.java           .js
-*.Java          .css
-*.java          .html
+*.html           .java
+*.css            .java
+*.js             .java
 
 
 # These files are binary and should be left untouched
