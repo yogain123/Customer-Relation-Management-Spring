@@ -1,9 +1,11 @@
 package com.yogendra.CRM.Services;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.google.gson.Gson;
 import com.yogendra.CRM.POJO.Address;
 import com.yogendra.CRM.POJO.Customer;
+import com.yogendra.CRM.POJO.Image;
 import com.yogendra.CRM.POJO.LocationFinder;
 import com.yogendra.CRM.POJO.Phone;
 import com.yogendra.CRM.POJO.Student;
@@ -214,6 +217,21 @@ public class CustomerDAOImpl implements CustomerDAO{
 
 		
 		return result;
+	}
+	
+	@org.springframework.transaction.annotation.Transactional
+	public void savingFile(byte[] file)
+	{
+		Session session = factory.getCurrentSession();
+		
+		System.out.println("inside savingFile DAO");
+		Gson gson = new Gson();
+		String fakejson = "{\"name\":\"CAT\"}";
+		Image image = new Image();
+		image = gson.fromJson(fakejson, Image.class);
+		image.setPhoto(file);
+		session.save(image);
+		
 	}
 
 	

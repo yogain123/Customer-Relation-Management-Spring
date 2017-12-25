@@ -13,6 +13,8 @@ public interface CustomerDAO {
 	public String gettingSearchedCustomer(int id);
 	
 	public String gettingSearchedCustomerWithName(String firstName);
+	
+	public void savingFile(byte[] file);
 
 
 }

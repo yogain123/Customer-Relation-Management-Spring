@@ -1,13 +1,16 @@
 package com.yogendra.CRM.Controller;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
+import com.yogendra.CRM.Services.CustomerDAOImpl;
 import com.yogendra.CRM.Services.CustomerService;
 import com.yogendra.CRM.Services.ServiceProvider;
 
@@ -75,6 +78,22 @@ public class hola
 		String result = customerService.gettingSearchedCustomerWithName(firstName);
 		
 		return result;
+	}
+	
+	
+	@RequestMapping(value="/file",method=RequestMethod.POST)
+	public String postingFile(@RequestBody String fileData)
+	{
+		//String ss = Base64.getEncoder().encodeToString(fileData.getBytes());
+		byte[] b = fileData.getBytes(StandardCharsets.UTF_8); // Java 7+ only
+
+		
+		//System.out.println(" inside postingFile "+Arrays.toString(b) + "****");
+		//String result = customerService.gettingSearchedCustomerWithName(firstName);
+		CustomerDAOImpl cc = new CustomerDAOImpl();
+		customerService.savingFile(b);
+		
+		return "success";
 	}
 	
 

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -42,7 +43,18 @@ public class Customer {
 	@JoinColumn(name="Phone_ID")
 	private Phone phno;
 	
+	@Transient
+	private boolean valid;
 	
+	
+
+	public boolean isValid() {
+		return valid;
+	}
+
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
 
 	public Phone getPhno() {
 		return phno;
