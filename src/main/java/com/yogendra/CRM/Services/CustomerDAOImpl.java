@@ -14,6 +14,7 @@ import com.yogendra.CRM.POJO.Address;
 import com.yogendra.CRM.POJO.Customer;
 import com.yogendra.CRM.POJO.LocationFinder;
 import com.yogendra.CRM.POJO.Phone;
+import com.yogendra.CRM.POJO.Student;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO{
@@ -21,7 +22,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 	@Autowired
 	private SessionFactory factory;
 	
-	@Autowired ServiceProvider service;
+	@Autowired 
+	ServiceProvider service;
 
 	
 	@org.springframework.transaction.annotation.Transactional
@@ -35,13 +37,24 @@ public class CustomerDAOImpl implements CustomerDAO{
 			Gson gson = new Gson();
 			Customer c = gson.fromJson(data, Customer.class);
 			session.save(c);
-
+			
+			//------------------------------------------------------------
 			//Just for Checking External API call from JAVA---------------
 			String uri = "http://ip-api.com/json/208.80.152.201";
 			String LocationJson = service.restCall(uri);  // Gettong All API Details
 			LocationFinder location = gson.fromJson(LocationJson, LocationFinder.class);
 			session.save(location);
 			//------------------------------------------------------------
+			
+			
+			//------------------------------------------------------------
+			//Just for Checking @ManyToMany RelationShip
+			String student_course_json = "{\"firstName\" : \"yogendra\", \"lastName\" : \"Saxena\", \"course\" : [{\"courseName\":\"Java\",\"courseAuthorName\":\"Chad\"},{\"courseName\":\"NodeJS\",\"courseAuthorName\":\"Bucky\"}]}";
+			Student s = gson.fromJson(student_course_json, Student.class);
+			session.save(s);
+			
+			//------------------------------------------------------------
+
 		}
 		catch(Exception e)
 		{
