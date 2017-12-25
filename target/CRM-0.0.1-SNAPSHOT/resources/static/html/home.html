@@ -1,0 +1,110 @@
+<h2 class="bg bg-primary" style="margin-bottom:50px; height:50px; align:centre">Customer Relationship Manager</h2>
+<a href="#!addCustomer" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span> Add Customer </a>
+<table style="margin-top:40px;" class="table">
+  <thead>
+    <tr>
+      <th>Customer ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Address 1</th>
+      <th>Address 2</th>
+      <th>Phone No.</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="active" ng-repeat="item in fakeData">
+      <td>{{item.id}}</td>
+      <td>{{item.firstName}}</td>
+      <td>{{item.lastName}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.address[0].city}} | {{item.address[0].country | countryFilter}}</td>
+      <td>{{item.address[1].city}} | {{item.address[1].country | countryFilter}}</td>
+      <td>
+        +{{item.phno.extensionNumber}} - {{item.phno.mainNumber}}
+      <td><button type="button" class="btn btn-warning" ng-click="update(item)">Update</button> | <button type="button" class="btn btn-danger" ng-click="delete(item)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<div class="row" style="margin-top:50px;">
+<h3>Search With ID : </h3>
+<form class="form-inline">
+  <div class="form-group">
+    <input type="value" class="form-control" ng-model="customerId">
+    <button class="btn btn-primary" type="button" ng-click="search()"> Search </button>
+  </div>
+</form>
+<table  class="table">
+  <thead>
+    <tr>
+      <th>Customer ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Address 1</th>
+      <th>Address 2</th>
+      <th>Phone No.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="active">
+      <td>{{item.id}}</td>
+      <td>{{item.firstName}}</td>
+      <td>{{item.lastName}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.address[0].city}} | {{item.address[0].country}}</td>
+      <td>{{item.address[1].city}} | {{item.address[1].country}}</td>
+      <td>
+        +{{item.phno.extensionNumber}} - {{item.phno.mainNumber}}
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+
+
+<div class="row" style="margin-top:50px;margin-bottom:100px;">
+<h3>Search With First Name : </h3>
+<form class="form-inline">
+  <div class="form-group">
+    <input type="text" class="form-control" ng-model="customerFirstName">
+    <button class="btn btn-primary" type="button" ng-click="searchWithName()"> Search </button>
+  </div>
+</form>
+<table  class="table">
+  <thead>
+    <tr>
+      <th>Customer ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Address 1</th>
+      <th>Address 2</th>
+      <th>Phone No.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="active"  ng-repeat="item in searchedData">
+      <td>{{item.id}}</td>
+      <td>{{item.firstName}}</td>
+      <td>{{item.lastName}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.address[0].city}} | {{item.address[0].country}}</td>
+      <td>{{item.address[1].city}} | {{item.address[1].country}}</td>
+      <td>
+        +{{item.phno.extensionNumber}} - {{item.phno.mainNumber}}
+    </tr>
+  </tbody>
+</table>
+</div>

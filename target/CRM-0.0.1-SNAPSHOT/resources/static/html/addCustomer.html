@@ -1,0 +1,70 @@
+<form name="myForm">
+  <h1>Welcome {{name}}</h1>
+  <fieldset style="margin-top:30px;">
+    <h1 class="text text-success" style="margin-bottom:30px;">Add Customer (All Fields Are Mandatory)</h1>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" name="firstName" class="form-control" id="firstName" placeholder="firstName" ng-model=personDetails.firstName>
+    </div><span ng-show="myForm.firstName.$invalid">INVALID</span>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" placeholder="lastName" ng-model=personDetails.lastName>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" ng-model=personDetails.email>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-6">
+      <h3>Address 1</h3>
+       <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter city" ng-model=address1.city ng-required="true">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter country" ng-model=address1.country ng-required="true">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div></div>
+
+      <div class="col-md-6">
+       <h3>Address 2</h3>
+       <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter city" ng-model=address2.city ng-required="true">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter country" ng-model=address2.country ng-required="true">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      </div>
+
+    </div>
+
+    <h3>Phone Number</h3>
+    <div class="form-group">
+      <label for="phno">Extension</label>
+      <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Phno" ng-model=personDetails.phno.extensionNumber ng-required="true">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="phno">Number</label>
+      <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Phno" ng-model=personDetails.phno.mainNumber ng-required="true">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+
+
+  <button type="button" class="btn btn-primary" ng-click="myForm.$valid && addDone()">Add</button>
+    </fieldset>
+</form>
