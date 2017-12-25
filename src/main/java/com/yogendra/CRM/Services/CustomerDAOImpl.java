@@ -7,10 +7,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.yogendra.CRM.POJO.Address;
 import com.yogendra.CRM.POJO.Customer;
+import com.yogendra.CRM.POJO.LocationFinder;
 import com.yogendra.CRM.POJO.Phone;
 
 @Repository
@@ -31,7 +33,12 @@ public class CustomerDAOImpl implements CustomerDAO{
 			Gson gson = new Gson();
 			Customer c = gson.fromJson(data, Customer.class);
 			session.save(c);
-			//return "Success";
+
+			//Just for Checking External API call from JAVA---------------
+			String LocationJson = CustomerDAOImpl.getLocation(); 
+			LocationFinder location = gson.fromJson(LocationJson, LocationFinder.class);
+			session.save(location);
+			//------------------------------------------------------------
 		}
 		catch(Exception e)
 		{
@@ -86,6 +93,9 @@ public class CustomerDAOImpl implements CustomerDAO{
 	    List<Address> addresses = new ArrayList<Address>();
 	    
 	    Phone phone = databaseValue.getPhno();
+	    System.out.println("Nulling");
+	    System.out.println(phone.getMainNumber());
+
 	    
 	    phone.setExtensionNumber(c.getPhno().getExtensionNumber());
 	    phone.setMainNumber(c.getPhno().getMainNumber());
@@ -112,6 +122,16 @@ public class CustomerDAOImpl implements CustomerDAO{
 		
 		session.update(databaseValue);
 	
+	}
+	
+	private static String getLocation()
+	{
+	    final String uri = "http://ip-api.com/json/208.80.152.201";
+	     
+	    RestTemplate restTemplate = new RestTemplate();
+	    String result = restTemplate.getForObject(uri, String.class);
+	     
+	    return result;
 	}
 	
 }

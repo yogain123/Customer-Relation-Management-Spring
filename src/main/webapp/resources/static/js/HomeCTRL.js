@@ -28,7 +28,7 @@ app.controller("homeCtrl", function($scope, $http, $state, $timeout) {
   $scope.init = () => {
 
     console.log("LOL "+JSON.stringify($state.get("/addCustomer").params));
-    console.log("inside init");
+    console.log("inside init***");
     $http.get("/CRM/gettingAllCustomer").then((data) => {
       $scope.fakeData = data.data;
       console.log($scope.fakeData);
@@ -38,6 +38,7 @@ app.controller("homeCtrl", function($scope, $http, $state, $timeout) {
       console.log("Error");
     });
   };
+  console.log("before Init**");
 
   $scope.init();
 
