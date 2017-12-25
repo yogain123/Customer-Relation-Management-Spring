@@ -25,6 +25,40 @@ app.controller("homeCtrl", function($scope, $http, $state, $timeout) {
 
   };
 
+  $scope.search = () => {
+
+
+    console.log("inside gettingSearchedCustomer with id "+$scope.customerId);
+
+    let url = "/CRM/gettingSearchedCustomer/"+$scope.customerId;
+    $http.get(url).then((data) => {
+
+      console.log("gettingSearchedCustomer "+JSON.stringify(data.data));
+      $scope.item = data.data;
+      console.log("success");
+    },() => {
+      console.log("Error");
+    });
+
+  };
+
+  $scope.searchWithName = () => {
+
+    console.log("inside searchWithName");
+    let url = "/CRM/gettingSearchedCustomerWithName/"+$scope.customerFirstName;
+    $http.get(url).then((data) => {
+
+      console.log("gettingSearchedCustomer "+JSON.stringify(data.data));
+      $scope.searchedData = data.data;
+      console.log("success");
+    },() => {
+      console.log("Error");
+    });
+
+
+
+  };
+
   $scope.init = () => {
 
     console.log("LOL "+JSON.stringify($state.get("/addCustomer").params));

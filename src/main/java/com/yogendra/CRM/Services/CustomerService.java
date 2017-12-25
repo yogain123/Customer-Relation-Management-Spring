@@ -9,6 +9,10 @@ public interface CustomerService {
 	public void deletingCustomer(int id);
 
 	public void updatingCustomer(int id, String data);
+	
+	public String gettingSearchedCustomer(int id);
+	
+	public String gettingSearchedCustomerWithName(String firstName);
 
 	
 

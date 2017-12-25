@@ -23,7 +23,16 @@ public class CustomerServiceImp implements CustomerService {
 	
 	public void updatingCustomer(int id, String data) {
 		customerDAO.updatingCustomer(id, data);
-}
+	}
+	public String gettingSearchedCustomer(int id) {
+		String result = customerDAO.gettingSearchedCustomer(id);
+		return result;
+	}
+	public String gettingSearchedCustomerWithName(String firstName) {
+
+		String result = customerDAO.gettingSearchedCustomerWithName(firstName);
+		return result;
+	}
 
 
 }

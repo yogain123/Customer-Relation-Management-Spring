@@ -57,6 +57,26 @@ public class hola
 		customerService.updatingCustomer(id, data);
 	}
 	
+	@RequestMapping(value="/gettingSearchedCustomer/{id}",method=RequestMethod.GET)
+	public String gettingSearchedCustomer(@PathVariable int id)
+	{
+		
+		System.out.println(" inside gettingSearchedCustomer "+id);
+		String result = customerService.gettingSearchedCustomer(id);
+		
+		return result;
+	}
+	
+	@RequestMapping(value="/gettingSearchedCustomerWithName/{firstName}",method=RequestMethod.GET)
+	public String gettingSearchedCustomerWithName(@PathVariable String firstName)
+	{
+		
+		System.out.println(" inside gettingSearchedCustomerWithName "+firstName);
+		String result = customerService.gettingSearchedCustomerWithName(firstName);
+		
+		return result;
+	}
+	
 
 	
 }

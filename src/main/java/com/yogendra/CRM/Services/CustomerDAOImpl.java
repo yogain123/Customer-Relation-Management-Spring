@@ -3,11 +3,12 @@ package com.yogendra.CRM.Services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 import com.yogendra.CRM.POJO.Address;
@@ -138,6 +139,38 @@ public class CustomerDAOImpl implements CustomerDAO{
 		
 		session.update(databaseValue);
 	
+	}
+
+	@org.springframework.transaction.annotation.Transactional
+	public String gettingSearchedCustomer(int id) {
+		System.out.println("Inside gettingSearchedCustomer");
+		String result="";
+		Session session = factory.getCurrentSession();
+		
+		Gson gson = new Gson();
+
+		Customer customer = (Customer) session.get(Customer.class, id);
+		result = gson.toJson(customer);
+		System.out.println(customer);
+		return result;
+	}
+	
+	
+	@org.springframework.transaction.annotation.Transactional
+	public String gettingSearchedCustomerWithName(String firstName) {
+		
+		System.out.println("Inside gettingSearchedCustomerWithName");
+		Session session = factory.getCurrentSession();
+		Gson gson = new Gson();
+		List<Customer> customersList = new ArrayList<Customer>();
+		
+		Criteria criteria = session.createCriteria(Customer.class);
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		customersList = (List<Customer>) criteria.add(Restrictions.eq("firstName", firstName)).list();
+		
+		String result = gson.toJson(customersList);
+		System.out.println(result);
+		return result;
 	}
 
 	
