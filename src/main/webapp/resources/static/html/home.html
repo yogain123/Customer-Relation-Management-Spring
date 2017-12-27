@@ -1,8 +1,12 @@
 <h2 class="bg bg-primary" style="margin-bottom:50px; height:50px; align:centre">Customer Relationship Manager</h2>
 
-File Upload : <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+<!-- File Upload : <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)" multiple/> -->
 
-<button type="button" ng-click="upload()"> Upload File </button>
+
+<input type="file" ng-file-model="files" multiple />
+<button type="button" ng-click="uploadFile()">Upload</button>
+
+
 <a href="#!addCustomer" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span> Add Customer </a>
 <table style="margin-top:40px;" class="table">
   <thead>
@@ -111,4 +115,13 @@ File Upload : <input type="file" name="file" onchange="angular.element(this).sco
     </tr>
   </tbody>
 </table>
+
+
+<form class="form-inline">
+  <div class="form-group">
+    <input type="text" class="form-control" ng-model="customerImage">
+    <button class="btn btn-primary" type="button" ng-click="searchCustomerImage()"> Search </button>
+    <img src={{imageData.content}} width="50px" height="50px" alt="yogi" ng-show="check"/>
+  </div>
+</form>
 </div>

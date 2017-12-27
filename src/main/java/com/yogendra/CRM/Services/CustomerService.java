@@ -14,7 +14,9 @@ public interface CustomerService {
 	
 	public String gettingSearchedCustomerWithName(String firstName);
 	
-	public void savingFile(byte[] file);
+	public void savingFile(String s);
+	
+	public String searchImageWithName(String imageName);
 
 	
 

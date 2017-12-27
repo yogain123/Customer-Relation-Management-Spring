@@ -33,10 +33,14 @@ public class CustomerServiceImp implements CustomerService {
 		String result = customerDAO.gettingSearchedCustomerWithName(firstName);
 		return result;
 	}
-	public void savingFile(byte[] file) {
-		// TODO Auto-generated method stub
+	public void savingFile(String s) {
 		
-		customerDAO.savingFile(file);
+		customerDAO.savingFile(s);
+	}
+	public String searchImageWithName(String imageName) {
+		
+		return customerDAO.searchImageWithName(imageName);
+		
 	}
 
 

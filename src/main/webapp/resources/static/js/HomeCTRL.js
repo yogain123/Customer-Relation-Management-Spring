@@ -59,18 +59,53 @@ app.controller("homeCtrl", function($scope, $http, $state, $timeout) {
 
   };
 
-  $scope.uploadFile = function(files) {
+  $scope.uploadFile = function() {
       //Take the first selected file
 
-      console.dir("filessss "+JSON.stringify(files));
-      let file = files[0];
-      let name = file.name;
-      console.log("name "+name);
-      $http.post("/CRM/file",file).then(() => {
-        console.log("success");
+      //console.log($scope.files.length);
+      //console.log(count);
+      //console.log("inside for");
+      let obj = {};
+      console.log($scope.files);
+      let file = $scope.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(file._file);
+      reader.onload = function () {
+      obj.name = file.name;
+      obj.content = reader.result;
+      console.log(obj);
+
+      $http.post("/CRM/file",obj).then(() => {
+        console.log("success ");
       },() => {
         console.log("Error");
       });
+      };
+      reader.onerror = function (error) {
+          console.log('Error: ', error);
+      };
+
+  };
+
+  $scope.searchCustomerImage = function(){
+
+
+    let url = "/CRM/searchImageWithName/"+$scope.customerImage;
+
+    $http.get(url).then((data) => {
+
+      $scope.imageData = data.data;
+      console.log("image DATA is "+JSON.stringify($scope.imageData));
+      console.log("success");
+      if($scope.imageData=="" || $scope.imageData==undefined || $scope.imageData==null)
+            $scope.check = false;
+      else {
+          $scope.check = true;
+      }
+    },() => {
+      $scope.check = false;
+      console.log("Error");
+    });
 
   };
 
@@ -89,7 +124,56 @@ app.controller("homeCtrl", function($scope, $http, $state, $timeout) {
   };
   console.log("before Init**");
 
-
+ $scope.check = false;
   $scope.init();
 
+
+
+
+
+  // function getBase64(file) {
+  //    var reader = new FileReader();
+  //    reader.readAsDataURL(file);
+  //    reader.onload = function () {
+  //       return reader.result;
+  //    };
+  //    reader.onerror = function (error) {
+  //      console.log('Error: ', error);
+  //    };
+  // }
+
 });
+
+app.directive('ngFileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var model = $parse(attrs.ngFileModel);
+            var isMultiple = attrs.multiple;
+            var modelSetter = model.assign;
+            element.bind('change', function () {
+                var values = [];
+                angular.forEach(element[0].files, function (item) {
+                    var value = {
+                       // File Name
+                        name: item.name,
+                        //File Size
+                        size: item.size,
+                        //File URL to view
+                        url: URL.createObjectURL(item),
+                        // File Input Value
+                        _file: item
+                    };
+                    values.push(value);
+                });
+                scope.$apply(function () {
+                    if (isMultiple) {
+                        modelSetter(scope, values);
+                    } else {
+                        modelSetter(scope, values[0]);
+                    }
+                });
+            });
+        }
+    };
+}]);

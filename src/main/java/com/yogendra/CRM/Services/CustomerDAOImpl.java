@@ -5,7 +5,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import org.json.JSONObject;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.yogendra.CRM.POJO.Address;
 import com.yogendra.CRM.POJO.Customer;
 import com.yogendra.CRM.POJO.Image;
@@ -220,18 +221,72 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 	
 	@org.springframework.transaction.annotation.Transactional
-	public void savingFile(byte[] file)
+	public void savingFile(String s)
 	{
 		Session session = factory.getCurrentSession();
 		
-		System.out.println("inside savingFile DAO");
+		//System.out.println(b);
+		
+//		System.out.println("inside savingFile DAO");
+//		Gson gson = new Gson();
+//		Image image = new Image();
+//		image = gson.fromJson(s, Image.class);
+//		//image.setPhoto(s);
+//		session.save(image);
+		
+		//String str = s;
+		//JSONObject obj = new JSONObject(str);
+		//String n = obj.getString("name");
+		//JSONObject a = obj.getJSONObject("content");
+		//System.out.println(n + " " + a);  // prints "Alice 20"
+		
 		Gson gson = new Gson();
-		String fakejson = "{\"name\":\"CAT\"}";
-		Image image = new Image();
-		image = gson.fromJson(fakejson, Image.class);
-		image.setPhoto(file);
+		
+		//Image image = gson.fromJson(s, Image.class);
+		//session.save(image);
+		
+		//Image image = new Image();
+		
+		//image.setName("HOLA");
+		//image.setContent(b);
+		
+		Image image = gson.fromJson(s, Image.class);
+		
+		image.setContentbyte(image.getContent().getBytes());
+		
+		System.out.println(image.getName());
+		
 		session.save(image);
 		
+		System.out.println("---------------");
+		
+		Image image1 = (Image) session.get(Image.class, 1);
+		
+		//System.out.println(new String(image1.getContentbyte()));
+		
+	}
+
+	@org.springframework.transaction.annotation.Transactional
+	public String searchImageWithName(String imageName) {
+		Session session = factory.getCurrentSession();
+		
+		System.out.println("insdie searchImageWithName DAO");
+		
+		Gson gson = new Gson();
+		Criteria criteria = session.createCriteria(Image.class);
+		List<Image> imageList = new ArrayList<Image>();
+		imageList = criteria.add(Restrictions.eq("name", imageName)).list();
+		Image image = imageList.get(0);
+		
+		image.setContent(new String(image.getContentbyte()));
+		
+		 String res = gson.toJson(image);
+		
+		//System.out.println(new String(image.getContentbyte()));
+		
+		//String res = Base64.getEncoder().encodeToString(image);
+		
+		 return res;
 	}
 
 	

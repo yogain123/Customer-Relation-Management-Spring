@@ -11,3 +11,4 @@ com/yogendra/CRM/POJO/Address.class
 com/yogendra/CRM/POJO/Customer.class
 com/yogendra/CRM/Services/CustomerDAOImpl.class
 com/yogendra/CRM/POJO/LocationFinder.class
+com/yogendra/CRM/POJO/Image.class

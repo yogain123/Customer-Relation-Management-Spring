@@ -59,6 +59,21 @@ app.controller("homeCtrl", function($scope, $http, $state, $timeout) {
 
   };
 
+  $scope.uploadFile = function(files) {
+      //Take the first selected file
+
+      console.dir("filessss "+JSON.stringify(files));
+      let file = files[0];
+      let name = file.name;
+      console.log("name "+name);
+      $http.post("/CRM/file",file).then(() => {
+        console.log("success");
+      },() => {
+        console.log("Error");
+      });
+
+  };
+
   $scope.init = () => {
 
     console.log("LOL "+JSON.stringify($state.get("/addCustomer").params));
@@ -73,6 +88,7 @@ app.controller("homeCtrl", function($scope, $http, $state, $timeout) {
     });
   };
   console.log("before Init**");
+
 
   $scope.init();
 

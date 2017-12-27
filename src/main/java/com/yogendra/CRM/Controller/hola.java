@@ -1,6 +1,6 @@
 package com.yogendra.CRM.Controller;
 
-import java.nio.charset.StandardCharsets;
+import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yogendra.CRM.Services.CustomerDAOImpl;
 import com.yogendra.CRM.Services.CustomerService;
 import com.yogendra.CRM.Services.ServiceProvider;
 
@@ -76,24 +75,34 @@ public class hola
 		
 		System.out.println(" inside gettingSearchedCustomerWithName "+firstName);
 		String result = customerService.gettingSearchedCustomerWithName(firstName);
-		
 		return result;
 	}
 	
 	
 	@RequestMapping(value="/file",method=RequestMethod.POST)
-	public String postingFile(@RequestBody String fileData)
+	public void postingFile(@RequestBody  String fileData)
 	{
-		//String ss = Base64.getEncoder().encodeToString(fileData.getBytes());
-		byte[] b = fileData.getBytes(StandardCharsets.UTF_8); // Java 7+ only
-
+		//System.out.println(fileData);
+		//System.out.println(fileData.getBytes());
+		//String encodedFile = Base64.getEncoder().encodeToString(fileData.getBytes("UTF-8"));
+		//System.out.println("HOLAAA1 "+encodedFile);
+		//byte[] decodedStr = Base64.getDecoder().decode( encodedFile );
+		//System.out.println( new String( decodedStr, "utf-8" ) );
 		
-		//System.out.println(" inside postingFile "+Arrays.toString(b) + "****");
-		//String result = customerService.gettingSearchedCustomerWithName(firstName);
-		CustomerDAOImpl cc = new CustomerDAOImpl();
-		customerService.savingFile(b);
-		
-		return "success";
+		//customerService.savingFile(fileData);
+		System.out.println(fileData);
+		customerService.savingFile(fileData);
+	}
+	
+	@RequestMapping(value="/searchImageWithName/{imageName}",method=RequestMethod.GET)
+	public String searchImageWithName(@PathVariable  String imageName)
+	{
+		System.out.println(imageName);
+		String imageNameee = imageName+".jpg";
+		System.out.println("image name is "+imageNameee);
+		String result = customerService.searchImageWithName(imageNameee);
+		System.out.println("hola "+result);
+		return result;
 	}
 	
 

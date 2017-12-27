@@ -1,4 +1,8 @@
 <h2 class="bg bg-primary" style="margin-bottom:50px; height:50px; align:centre">Customer Relationship Manager</h2>
+
+File Upload : <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+
+<button type="button" ng-click="upload()"> Upload File </button>
 <a href="#!addCustomer" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span> Add Customer </a>
 <table style="margin-top:40px;" class="table">
   <thead>
