@@ -1,5 +1,4 @@
-![screen shot 1939-10-04 at 5 50 23 pm](https://user-images.githubusercontent.com/14003377/34339584-28086bd6-e99c-11e7-8c34-e3b688d16ef4.png)
-
+![screen shot 1939-10-07 at 11 35 55 pm](https://user-images.githubusercontent.com/14003377/34419178-68622c56-ec28-11e7-8936-ebbf2ce7e90d.png)
 
 # Customer Relation Management
 
