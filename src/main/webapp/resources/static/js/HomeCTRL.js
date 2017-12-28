@@ -77,6 +77,9 @@ app.controller("homeCtrl", function($scope, $http, $state, $timeout) {
 
       $http.post("/CRM/file",obj).then(() => {
         console.log("success ");
+        $('#modal').modal({backdrop: 'static'});
+        $('#modal').modal({keyboard: false});
+        $('#modal').modal('show');
       },() => {
         console.log("Error");
       });

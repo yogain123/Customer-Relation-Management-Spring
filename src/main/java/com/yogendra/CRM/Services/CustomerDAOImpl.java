@@ -238,7 +238,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		//JSONObject obj = new JSONObject(str);
 		//String n = obj.getString("name");
 		//JSONObject a = obj.getJSONObject("content");
-		//System.out.println(n + " " + a);  // prints "Alice 20"
+		//System.out.println(n + " " + a);  // prints "Alice 20"//
 		
 		Gson gson = new Gson();
 		
@@ -280,13 +280,13 @@ public class CustomerDAOImpl implements CustomerDAO{
 		
 		image.setContent(new String(image.getContentbyte()));
 		
-		 String res = gson.toJson(image);
+		String res = gson.toJson(image);
 		
 		//System.out.println(new String(image.getContentbyte()));
 		
 		//String res = Base64.getEncoder().encodeToString(image);
 		
-		 return res;
+		return res;
 	}
 
 	

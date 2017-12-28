@@ -98,9 +98,8 @@ public class hola
 	public String searchImageWithName(@PathVariable  String imageName)
 	{
 		System.out.println(imageName);
-		String imageNameee = imageName+".jpg";
-		System.out.println("image name is "+imageNameee);
-		String result = customerService.searchImageWithName(imageNameee);
+		imageName = imageName+".jpg";
+		String result = customerService.searchImageWithName(imageName);
 		System.out.println("hola "+result);
 		return result;
 	}
