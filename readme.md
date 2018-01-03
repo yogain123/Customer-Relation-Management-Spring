@@ -52,7 +52,7 @@ ETC....
 
 ## Authors
 
-* **Yogendra Saxena** - *Initial work* - [Yogendra Saxena](https://github.com/yogain123)
+* **Yogendra Saxena** - *Initial work* - [Yogendra Saxena](https://yogain123.github.io)
 
 
 
